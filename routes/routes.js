@@ -2,6 +2,9 @@ const express= require("express")
 const router = express.Router()
 const bcrypt = require("bcrypt")
 const usr = require("../database/schema")
+const surv = require("../database/schema")
+const question = require("../database/schema")
+const survreport = require("../database/schema")
 const jwt = require("jsonwebtoken")
 const {generateToken,authenticateToken} = require("../auth/jwt")
 
@@ -192,7 +195,48 @@ router.delete('/files', (req, res) => {
 });
 
 
+// posting survey details
 
+router.post("/survey",authenticateToken,async(req,res)=>{
+    try{
+        await question.create(req.body)
+        res.send("survey inserted")
+        console.log("survey inserted")
+    }
+    catch(err){
+        res.send({err:err.message})
+        console.log(err)
+    }
+})
+
+
+// posting question details
+router.post("/question",authenticateToken,async(req,res)=>{
+    try{
+        await surv.create(req.body)
+        res.send("question inserted")
+        console.log("question inserted")
+    }
+    catch(err){
+        res.send({err:err.message})
+        console.log(err)
+    }
+})
+
+
+// posting survey report inserted
+
+router.post("/surveyreport",authenticateToken,async(req,res)=>{
+    try{
+        await survreport.create(req.body)
+        res.send("surveyreport inserted")
+        console.log("surveyreport inserted")
+    }
+    catch(err){
+        res.send({err:err.message})
+        console.log(err)
+    }
+})
 
 
 
