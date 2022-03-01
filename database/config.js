@@ -1,5 +1,7 @@
-const mongoose = require("mongoose")
+require("dotenv").config()
+ mongoose = require("mongoose")
 const url = "mongodb+srv://sampath:passwords@cluster0.w3bhu.mongodb.net/survey_app?retryWrites=true&w=majority"
+// const url = process.env.mongoURI
 mongoose.connect(url,({useNewUrlParser: true,useUnifiedTopology: true}))
 
 const con = mongoose.connection
